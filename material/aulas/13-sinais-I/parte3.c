@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <signal.h>
 
 
 int main() {
@@ -10,13 +11,16 @@ int main() {
 
     filho = fork();
     if (filho == 0) {
-        int i = 1/0;
-        printf("Divisão por zero!\n");  // não vai aparecer pq para na divisão por 0, que é ilegal
+        printf("Meu PID: %d\n", getpid());
+        while(1);
     }
 
     int status;
-    int x = wait(&status);
-    printf("PID: %d\n", x);
+
+    sleep(10);
+    kill(filho, SIGKILL);
+
+    wait(&status);
 
 
     printf("EXITED %d \n"
@@ -31,3 +35,6 @@ int main() {
 
     return 0;
 }
+
+// ctrl c -> mata o pai -> mata o filho
+// kill -> mata o filho

@@ -10,8 +10,8 @@ int main() {
 
     filho = fork();
     if (filho == 0) {
-        int i = 1/0;
-        printf("Divisão por zero!\n");  // não vai aparecer pq para na divisão por 0, que é ilegal
+        printf("Meu PID: %d\n", getpid());
+        while(1);
     }
 
     int status;
@@ -31,3 +31,6 @@ int main() {
 
     return 0;
 }
+
+// ctrl c -> mata o pai -> mata o filho
+// kill -> mata o filho
